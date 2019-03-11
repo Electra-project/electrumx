@@ -2881,3 +2881,27 @@ class Onixcoin(Coin):
         '''Given a header return the hash.'''
         import x11_hash
         return x11_hash.getPoWHash(header)
+
+class Electra(Coin):
+    NAME = "Electra"
+    SHORTNAME = "ECA"
+    NET = "mainnet"
+    XPUB_VERBYTES = bytes.fromhex("0488b21e")
+    XPRV_VERBYTES = bytes.fromhex("0488ade4")
+    P2PKH_VERBYTE = bytes.fromhex("21")
+    P2SH_VERBYTES = [bytes.fromhex("28")]
+    WIF_BYTE = bytes.fromhex("A1")
+    GENESIS_HASH = ('00000f98da995de0ef1665c7d3338687'
+                    '923c1199230a44ecbdb5cec9306e4f4e')
+    RPC_PORT = 5788
+    TX_COUNT = 615729
+    TX_COUNT_HEIGHT = 205243
+    TX_PER_BLOCK = 3
+	PEERS = [
+        '79.137.39.240 s t',
+        '51.38.115.250 s t',
+        '54.38.53.207 s t',
+        '178.128.111.9 s t',
+        '159.89.168.255 s t',
+        '159.89.171.67 s t'
+    ]
