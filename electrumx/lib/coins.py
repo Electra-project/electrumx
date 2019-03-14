@@ -2897,11 +2897,10 @@ class Electra(Coin):
     TX_COUNT = 615729
     TX_COUNT_HEIGHT = 205243
     TX_PER_BLOCK = 3
-	PEERS = [
-        '79.137.39.240 s t',
-        '51.38.115.250 s t',
-        '54.38.53.207 s t',
-        '178.128.111.9 s t',
-        '159.89.168.255 s t',
-        '159.89.171.67 s t'
-    ]
+    REORG_LIMIT = 100
+
+    @classmethod
+    def header_hash(cls, header):
+        '''Given a header return the hash.'''
+        import nist5_hash
+        return nist5_hash.getPoWHash(header)
