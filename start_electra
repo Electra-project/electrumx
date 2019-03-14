@@ -1,0 +1,25 @@
+#!/bin/bash
+
+export RPC_PORT=5788
+export CACHE_MB=1200
+
+export COIN=Electra
+export DB_DIRECTORY=~/.electrumx/eca
+export DAEMON_URL=http://rpcuser:rpcpass@127.0.0.1:5788
+
+export NET=mainnet
+export DB_ENGINE=leveldb
+export HOST=127.0.0.1
+export TCP_PORT=50001
+export SSL_PORT=50002
+export SSL_CERTFILE=~/.electrumx/server.crt
+export SSL_KEYFILE=~/.electrumx/server.key
+export BANNER_FILE=~/.electrumx/banner_file.txt
+export DONATION_ADDRESS=ETtSXKR6KdpxahRcPyyGS2JUrtDFgbUPVv
+
+# run electrumx
+ulimit -n 10000
+while [ true ] ; do
+  echo "Starting ElectrumX, logging to ~/.electrumx/electrumx.log"
+  ~/electrumx/electrumx_server >> ~/.electrumx/electrumx.log 2>> ~/.electrumx/electrumx.log
+done

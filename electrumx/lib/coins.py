@@ -2898,6 +2898,7 @@ class Electra(Coin):
     TX_COUNT_HEIGHT = 205243
     TX_PER_BLOCK = 3
     REORG_LIMIT = 100
+    DESERIALIZER = lib_tx.DeserializerTxTime
 
     @classmethod
     def header_hash(cls, header):

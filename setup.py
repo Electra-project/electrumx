@@ -17,12 +17,12 @@ setuptools.setup(
     install_requires=['aiorpcX>=0.10.4,<0.11', 'attrs',
                       'plyvel', 'pylru', 'aiohttp >= 2'],
     packages=setuptools.find_packages(include=('electrumx*',)),
-    description='ElectrumX Server',
+    description='ElectrumX Server for Electra',
     author='Neil Booth',
     author_email='kyuupichan@gmail.com',
     license='MIT Licence',
-    url='https://github.com/kyuupichan/electrumx',
-    long_description='Server implementation for the Electrum protocol',
+    url='https://github.com/Jenova7/electrumx',
+    long_description='Server implementation for the Electra Electrum protocol',
     download_url=('https://github.com/kyuupichan/electrumX/archive/'
                   f'{version}.tar.gz'),
     classifiers=[
