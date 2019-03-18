@@ -2898,10 +2898,15 @@ class Electra(Coin):
     TX_COUNT_HEIGHT = 205243
     TX_PER_BLOCK = 3
     REORG_LIMIT = 100
-    DESERIALIZER = lib_tx.DeserializerTxTime
+    DESERIALIZER = lib_tx.DeserializerElectra
 
     @classmethod
     def header_hash(cls, header):
         '''Given a header return the hash.'''
+        version, = util.unpack_le_uint32_from(header)
         import nist5_hash
-        return nist5_hash.getPoWHash(header)
+
+        if version != 8:
+            return nist5_hash.getPoWHash(header)
+        else:
+            return double_sha256(header)
