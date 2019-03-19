@@ -17,48 +17,51 @@ Install electrad and run it with -txindex just like you would with an explorer.
 
 # Install Python 3.7
 
-	mkdir /tmp/Python37
+	`mkdir /tmp/Python37
 	cd /tmp/Python37
 	wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tar.xz
 	tar xvf Python-3.7.0.tar.xz
 	cd /tmp/Python37/Python-3.7.0
 	./configure
 	sudo make altinstall
+	git clone https://github.com/Jenova7/nist5_hash
+	cd nist5_hash
+	python setup.py install`
 
 # Setup your local virtualenv for Python
 
-	sudo pip install virtualenv
+	`sudo pip install virtualenv
 	cd ~
 	virtualenv -p /usr/local/bin/python3.7 ve 
 	echo "source ve/bin/activate" >> ~/.bashrc
 	. ~/.bashrc
 	python --version # Should show 3.7
-	pip install plyvel pylru aiorpcx aiohttp
+	pip install plyvel pylru aiorpcx aiohttp`
 
 # Install ElectrumX
 
-	git clone https://github.com/Jenova7/electrumx
+	`git clone https://github.com/Jenova7/electrumx
 	cd electrumx/
 	python setup.py install
 	mkdir -p ~/.electrumx/eca
 	# Set a password for x (pass:x )
-	openssl genrsa -des3 -passout pass:x -out ~/server.pass.key 2048
+	`openssl genrsa -des3 -passout pass:x -out ~/server.pass.key 2048
 	openssl rsa -passin pass:x -in ~/server.pass.key -out ~/.electrumx/server.key
-	rm ~/server.pass.key
+	rm ~/server.pass.key`
 	# Don’t set a password in the next step !
-	openssl req -new -key ~/.electrumx/server.key -out ~/.electrumx/server.csr
-	openssl x509 -req -days 1825 -in ~/.electrumx/server.csr -signkey ~/.electrumx/server.key -out ~/.electrumx/server.crt
+	`openssl req -new -key ~/.electrumx/server.key -out ~/.electrumx/server.csr
+	openssl x509 -req -days 1825 -in ~/.electrumx/server.csr -signkey ~/.electrumx/server.key -out ~/.electrumx/server.crt`
 
-# Edit ~/electrumx/start_electra to update the variables to reflect your local environment.
+# Edit ~/electrumx/start_electra to update the variables to reflect your local environment
 
-	nano ~/electrumx/start_electra
+	`nano ~/electrumx/start_electra
 	~/electrumx/start_electra &
-	tail -f ~/.electrumx/electrumx.log # to watch the logs.
+	tail -f ~/.electrumx/electrumx.log # to watch the logs.`
 
 It'll take a while to connect and build its local database, so be patient. After the syncing is finished, you can connect and test it with:
 
-(echo '{ "id": 0, "method": "server.version", "params": [ "2.7.11", "1.3" ] }'; sleep 3) | ncat --ssl localhost 50002
+`(echo '{ "id": 0, "method": "server.version", "params": [ "2.7.11", "1.3" ] }'; sleep 3) | ncat --ssl localhost 50002`
 
 You should see a response like:
 
-{"jsonrpc": "2.0", "result": ["ElectrumX 1.8.5", "1.3"], "id": 0}
+`{"jsonrpc": "2.0", "result": ["ElectrumX 1.8.5", "1.3"], "id": 0}`
