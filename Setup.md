@@ -40,7 +40,7 @@ Install electrad and run it with -txindex just like you would with an explorer.
 
 # Install ElectrumX
 
-	`git clone https://github.com/Jenova7/electrumx
+	`git clone https://github.com/kyuupichan/electrumx
 	cd electrumx/
 	python setup.py install
 	mkdir -p ~/.electrumx/eca
