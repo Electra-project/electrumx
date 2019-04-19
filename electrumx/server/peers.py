@@ -142,13 +142,19 @@ class PeerManager(object):
             try:
                 async with session.get(url) as response:
                     r = await response.text()
-                self.blacklist = set(json.loads(r))
+                self.blacklist = set([entry.lower() for entry in json.loads(r)])
                 self.logger.info(f'blacklist from {url} has {len(self.blacklist)} entries')
             except Exception as e:
                 self.logger.error(f'could not retrieve blacklist from {url}: {e}')
+            else:
+                # Got new blacklist. Now check our current peers against it
+                for peer in self.peers:
+                    if self._is_blacklisted(peer.host):
+                        peer.retry_event.set()
             await sleep(600)
 
     def _is_blacklisted(self, host):
+        host = host.lower()
         return any(item in self.blacklist
                    for item in (host, '*.' + '.'.join(host.split('.')[-2:])))
 
