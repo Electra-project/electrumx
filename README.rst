@@ -7,19 +7,6 @@
 ElectrumX - Reimplementation of electrum-server
 ===============================================
 
-For a future network with bigger blocks.
+`Electra ElectrumX-Server setup <https://github.com/Jenova7/electrumx/blob/master/HowToSetupElectraServer.md>`_
 
-  :Licence: MIT
-  :Language: Python (>= 3.6)
-  :Author: Neil Booth
-
-Documentation
-=============
-
-See `readthedocs <https://electrumx.readthedocs.io/>`_.
-
-
-**Neil Booth**  kyuupichan@gmail.com  https://github.com/kyuupichan
-
-
-1BWwXJH3q6PRsizBkSGm2Uw4Sz1urZ5sCj
+Server address: https://electrumx.electraproject.org
