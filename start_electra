@@ -1,11 +1,11 @@
 #!/bin/bash
 
-export RPC_PORT=5788
+export RPC_PORT=XXXX # Electrumx RPC command port, different than Electrad port (5788)
 export CACHE_MB=1200
 
 export COIN=Electra
 export DB_DIRECTORY=~/.electrumx/eca
-export DAEMON_URL=http://rpcuser:rpcpass@DaemonHost:5788
+export DAEMON_URL=http://RPCuser:RPCpass@127.0.0.1:5788
 
 export NET=mainnet
 export DB_ENGINE=leveldb
@@ -16,7 +16,7 @@ export SSL_PORT=50002
 export SSL_CERTFILE=~/.electrumx/server.crt
 export SSL_KEYFILE=~/.electrumx/server.key
 export BANNER_FILE=~/.electrumx/banner_file.txt
-export DONATION_ADDRESS=ETtSXKR6KdpxahRcPyyGS2JUrtDFgbUPVv
+export DONATION_ADDRESS=EMqScFdH6haBnixMZaRN3crm7uMXTihjyg
 
 # run electrumx
 ulimit -n 10000

@@ -11,7 +11,7 @@ Install electrad and run it with -txindex just like you would with an explorer.
 	sudo apt-get -y install zlib1g-dev libsqlite3-dev tk-dev
 	sudo apt-get -y install libssl-dev openssl
 	sudo apt-get -y install libffi-dev
-	sudo apt-get zip unzip
+	sudo apt-get -y install zip
 	sudo ufw allow 50001/tcp # Needed to allow incoming connections
 	sudo ufw allow 50002/tcp # Needed to allow incoming connections
 
@@ -23,10 +23,7 @@ Install electrad and run it with -txindex just like you would with an explorer.
 	tar xvf Python-3.7.0.tar.xz
 	cd /tmp/Python37/Python-3.7.0
 	./configure
-	sudo make altinstall
-	git clone https://github.com/Jenova7/nist5_hash
-	cd nist5_hash
-	python setup.py install`
+	sudo make altinstall`
 
 # Setup your local virtualenv for Python
 
@@ -37,6 +34,13 @@ Install electrad and run it with -txindex just like you would with an explorer.
 	. ~/.bashrc
 	python --version # Should show 3.7
 	pip install plyvel pylru aiorpcx aiohttp`
+
+# Install NIST5
+
+    `cd ~/ve/lib/python3.7
+	git clone https://github.com/Jenova7/nist5_hash
+	cd nist5_hash
+	python setup.py install`
 
 # Install ElectrumX
 
@@ -54,9 +58,13 @@ Install electrad and run it with -txindex just like you would with an explorer.
 
 # Edit ~/electrumx/start_electra to update the variables to reflect your local environment
 
-	`nano ~/electrumx/start_electra
-	~/electrumx/start_electra &
-	tail -f ~/.electrumx/electrumx.log # to watch the logs.`
+	`nano ~/electrumx/start_electra`
+
+# Run ElectrumX server and watch the logs
+
+	`~/electrumx/start_electra &
+	
+	tail -f ~/.electrumx/electrumx.log`
 
 It'll take a while to connect and build its local database, so be patient. After the syncing is finished, you can connect and test it with:
 
