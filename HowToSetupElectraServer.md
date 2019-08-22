@@ -6,70 +6,93 @@ Install electrad and run it with -txindex just like you would with an explorer.
 
 # Install necessary packages
 
+```
 	sudo apt-get -y install build-essential python-dev python-setuptools python-pip python-smbus
 	sudo apt-get -y install libncursesw5-dev libgdbm-dev libc6-dev
 	sudo apt-get -y install zlib1g-dev libsqlite3-dev tk-dev
 	sudo apt-get -y install libssl-dev openssl
 	sudo apt-get -y install libffi-dev
-	sudo apt-get -y install zip
 	sudo ufw allow 50001/tcp # Needed to allow incoming connections
 	sudo ufw allow 50002/tcp # Needed to allow incoming connections
+```
 
-# Install Python 3.7
+### Install Python 3.7
 
-	`mkdir /tmp/Python37
+	```
+	mkdir /tmp/Python37
 	cd /tmp/Python37
 	wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tar.xz
 	tar xvf Python-3.7.0.tar.xz
 	cd /tmp/Python37/Python-3.7.0
 	./configure
-	sudo make altinstall`
+	sudo make altinstall
+	```
 
-# Setup your local virtualenv for Python
+### Setup your local virtualenv for Python
 
-	`sudo pip install virtualenv
+	```
+	sudo pip install virtualenv
 	cd ~
 	virtualenv -p /usr/local/bin/python3.7 ve 
 	echo "source ve/bin/activate" >> ~/.bashrc
 	. ~/.bashrc
 	python --version # Should show 3.7
-	pip install plyvel pylru aiorpcx aiohttp`
+	pip install plyvel pylru aiohttp
+	pip install aiorpcx==0.10.4
+	```
 
-# Install NIST5
+### Install NIST5
 
-    `cd ~/ve/lib/python3.7
+    ```
+	cd ~/ve/lib/python3.7
 	git clone https://github.com/Jenova7/nist5_hash
 	cd nist5_hash
-	python setup.py install`
+	python setup.py install
+	```
 
-# Install ElectrumX
+### Install ElectrumX
 
-	`git clone https://github.com/kyuupichan/electrumx
+	```
+	git clone https://github.com/Electra-project/electrumx.git
 	cd electrumx/
 	python setup.py install
 	mkdir -p ~/.electrumx/eca
+	```
 	# Set a password for x (pass:x )
-	`openssl genrsa -des3 -passout pass:x -out ~/server.pass.key 2048
+	```openssl genrsa -des3 -passout pass:x -out ~/server.pass.key 2048
 	openssl rsa -passin pass:x -in ~/server.pass.key -out ~/.electrumx/server.key
-	rm ~/server.pass.key`
+	rm ~/server.pass.key```
 	# Don’t set a password in the next step !
-	`openssl req -new -key ~/.electrumx/server.key -out ~/.electrumx/server.csr
-	openssl x509 -req -days 1825 -in ~/.electrumx/server.csr -signkey ~/.electrumx/server.key -out ~/.electrumx/server.crt`
+	```openssl req -new -key ~/.electrumx/server.key -out ~/.electrumx/server.csr
+	openssl x509 -req -days 1825 -in ~/.electrumx/server.csr -signkey ~/.electrumx/server.key -out ~/.electrumx/server.crt```
 
-# Edit ~/electrumx/start_electra to update the variables to reflect your local environment
+### Edit ~/electrumx/start_electra to update the variables to reflect your local environment
 
-	`nano ~/electrumx/start_electra`
+```
+	nano ~/electrumx/start_electra
+```
+### Run ElectrumX server and watch the logs
 
-# Run ElectrumX server and watch the logs
+Better to use a detached screen to run the start command:
 
-	`~/electrumx/start_electra &
-	
-	tail -f ~/.electrumx/electrumx.log`
+	```
+	~/electrumx/start_electra
+	```
+It will take some time to build the local database.
 
-It'll take a while to connect and build its local database, so be patient. After the syncing is finished, you can connect and test it with:
+To watch the log:
+	```	
+	tail -f ~/.electrumx/electrumx.log
+	```
 
-`(echo '{ "id": 0, "method": "server.version", "params": [ "2.7.11", "1.3" ] }'; sleep 3) | ncat --ssl localhost 50002`
+After the syncing is finished, you can connect and test it with:
+
+```
+(echo '{ "id": 0, "method": "server.version", "params": [ "2.7.11", "1.3" ] }'; sleep 3) | ncat --ssl localhost 50002
+```
 
 You should see a response like:
 
-`{"jsonrpc": "2.0", "result": ["ElectrumX 1.8.5", "1.3"], "id": 0}`
+```
+{"jsonrpc": "2.0", "result": ["ElectrumX 1.10.0", "1.3"], "id": 0}
+```
